@@ -40,6 +40,8 @@ group :production do
 
  gem 'thor', '0.19.1'
 
+ gem 'bootstrap-sass'
+
  group :development do
    gem 'listen', '~> 3.0.5'
  end
