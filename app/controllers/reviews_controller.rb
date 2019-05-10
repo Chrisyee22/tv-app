@@ -1,15 +1,47 @@
 class ReviewsController < ApplicationController
-  require 'uri'
-  before_action :set_show, only: [:show, :edit, :update, :destroy]
+  before_action :set_tv_show, only: %i[show edit update destroy]
   def index
-    response = HTTParty.get("https://api.themoviedb.org/3/discover/tv?api_key=#{api_key}&language=en-US&page=1")
+    response = HTTParty.get("https://api.themoviedb.org/3/tv/popular?api_key=#{api_key}&language=en-US&page=1")
     @reviews = response['results']
   end
 
   def new
     @review = Review.new
   end
+  def create
+      @review = Review.new(review_params)
 
+      respond_to do |format|
+        if @review.save
+          format.html { redirect_to @review, notice: 'Tv show was successfully created.' }
+          format.json { render :show, status: :created, location: @review }
+        else
+          format.html { render :new }
+          format.json { render json: @review.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    def update
+      respond_to do |format|
+        if @review.update(review_params)
+          format.html { redirect_to @review, notice: 'Tv show was successfully updated.' }
+          format.json { render :show, status: :ok, location: @review }
+        else
+          format.html { render :edit }
+          format.json { render json: @review.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
+
+    def destroy
+      @review.destroy
+      respond_to do |format|
+        format.html { redirect_to reviews_url, notice: 'Tv show was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    end
   def view_show
     show_id = request.original_url.split('/')[4]
     @review = HTTParty.get("https://api.themoviedb.org/3/tv/#{show_id}?api_key=#{api_key}&language=en-US")
