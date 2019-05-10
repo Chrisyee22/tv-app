@@ -40,7 +40,13 @@ group :production do
 
  gem 'thor', '0.19.1'
 
+ gem 'httparty'
+
+ gem 'figaro'
+
  gem 'bootstrap-sass'
+
+ gem 'materialize-sass'
 
  group :development do
    gem 'listen', '~> 3.0.5'

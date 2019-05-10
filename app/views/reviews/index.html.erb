@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <%= render "layouts/title" %>
+  <%= render "layouts/search" %>
+  <div class="row">
+    <div class="col s12">
+      <div class="card green accent-4">
+        <div class="card-content white-text center-align">
+          <span class="flow-text">Popular TV</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% @reviews.each_with_index do |review, index| %>
+    <div class="col s12 m6 l4">
+      <div class="card medium black white-text hoverable">
+      <%= link_to view_show_review_path(review["id"]) do %>
+          <div class="card-image">
+            <div class="img-fade">
+              <img src="https://image.tmdb.org/t/p/w500<%= review["backdrop_path"] %>">
+            </div>
+            <span class="card-title name"><%= review["name"] %></span>
+          </div>
+        <% end %>
+        <div class="overview-text">
+          <%= review["overview"][0..300] + '...' %>
+          <%= link_to 'MORE', view_show_review_path(review["id"]) %>
+          <span class="invisible-tv-show-ids"><%= review["id"] %></span>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

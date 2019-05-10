@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <%= render "layouts/title" %>
+  <%= render "layouts/search" %>
+
+  <% if @search_results["results"].length > 0 %>
+  <div class="row">
+    <div class="col s12">
+      <div class="card grey darken-4">
+        <div class="card-content white-text">
+          <span class="">Search Results</span>
+        </div>
+        <div class="card-action">
+          <a href="#" onclick="location.href = document.referrer; return false;">Go Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% @search_results["results"].each_with_index do |search_result, index| %>
+    <div class="col s12 m6 l4">
+      <div class="card medium black white-text hoverable">
+        <%= link_to view_show_review_path(search_result["id"]) do %>
+          <div class="card-image">
+            <% if search_result["backdrop_path"] %>
+              <div class="img-fade">
+                <img src="https://image.tmdb.org/t/p/w500<%= search_result["backdrop_path"] %>">
+              </div>
+              <% elsif search_result["poster_path"] %>
+              <div class="poster-container">
+                <div class="poster-fade cropper">
+                  <img src="https://image.tmdb.org/t/p/w500<%= search_result["poster_path"] %>">
+                </div>
+              </div>
+              <% else %>
+              <div class="img-fade">
+                <img src="https://c.na72.content.force.com/servlet/servlet.ImageServer?id=0151H000004FM1FQAW&oid=00DA0000000Zzoi">
+              </div>
+              <% end %>
+            <span class="card-title name"><%= search_result["name"] %></span>
+          </div>
+        <% end %>
+        <div class="overview-text">
+          <%= search_result["overview"][0..300] + '...' %>
+          <%= link_to 'MORE', view_show_review_path(search_result["id"]) %>
+          <span class="invisible-tv-show-ids"><%= search_result["id"] %></span>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% else %>
+  <div class="row">
+    <div class="col s12">
+      <div class="card grey darken-4">
+        <div class="card-content white-text">
+          <h3 class="flow-text">No Results for this serch term. Try again!</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+
+
+</div>

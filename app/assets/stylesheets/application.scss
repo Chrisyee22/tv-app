@@ -12,6 +12,30 @@
  *
  *= require_tree .
  *= require_self
+ *= require_materialize
+ *= require_material_icons
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
+
+@import "materialize";
+.invisible-tv-show-ids {
+  visibility: hidden;
+}
+
+
+.row .input-field .prefix.active {
+   color: blue;
+ }
+
+ div {
+   &.field, &.actions {
+     margin-bottom: 10px;
+   }
+ }
+
+ .autocomplete-content li .highlight {
+    color: red!important;
+  }
+#filler{
+  padding-left: 50px;
+  padding-top: 10px;
+}
