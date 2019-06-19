@@ -21,6 +21,10 @@
   visibility: hidden;
 }
 
+.row .input-field input:focus {
+   border-bottom: 1px solid black !important;
+   box-shadow: 0 1px 0 0 black !important
+ }
 
 .row .input-field .prefix.active {
    color: blue;
@@ -31,11 +35,18 @@
      margin-bottom: 10px;
    }
  }
+ .section-search input.autocomplete {
+   color: #e45d;
+ }
 
+ .dropdown-content li>a, .dropdown-content li>span {
+   color: #000!important;
+ }
  .autocomplete-content li .highlight {
     color: red!important;
   }
-#filler{
-  padding-left: 50px;
+#filler {
+  font-size: 150%;
+  padding-left: 10px;
   padding-top: 10px;
 }

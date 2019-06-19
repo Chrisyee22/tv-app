@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   before_action :set_tv_show, only: %i[show edit update destroy]
   def index
-  endpoint = "https://api.themoviedb.org/3/tv/popular?api_key=#{api_key}&language=en-US&page=1"
+  endpoint = "https://api.themoviedb.org/3/discover/tv?api_key=#{api_key}&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false"
     # puts "THE MOVIE DB RESPONSE ", response
     # @reviews = response['results'] || []
 
