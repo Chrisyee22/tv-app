@@ -3,9 +3,12 @@ class ReviewsController < ApplicationController
 
   before_action :set_tv_show, only: %i[show edit update destroy]
   def index
-    response = HTTParty.get("https://api.themoviedb.org/3/tv/popular?api_key=#{api_key}&language=en-US&page=1")
-    puts "THE MOVIE DB RESPONSE ", response
-    @reviews = response['results'] || []
+  endpoint = "https://api.themoviedb.org/3/tv/popular?api_key=#{api_key}&language=en-US&page=1"
+    # puts "THE MOVIE DB RESPONSE ", response
+    # @reviews = response['results'] || []
+
+    response = HTTParty.get(endpoint)
+    @reviews =  response['results']
   end
 
   def new
